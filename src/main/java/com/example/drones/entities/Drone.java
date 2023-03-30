@@ -5,6 +5,8 @@ import com.example.drones.enums.DroneState;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "Drones")
@@ -30,4 +32,8 @@ public class Drone {
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
     private DroneState state;
+
+    @OneToMany
+    @Column(nullable = true)
+    private List<Medication> medications;
 }

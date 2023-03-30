@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/api/v1/drones")
 public class DroneController {
@@ -16,11 +18,11 @@ public class DroneController {
     @PostMapping("/register")
     public @ResponseBody String register(@RequestBody Drone drone) {
         droneService.addDrone(drone);
-        return "Ok!";
+        return "Drone has been registered successfully";
     }
 
     @GetMapping
-    public @ResponseBody String getDrones() {
-        return "Ok!";
+    public @ResponseBody List<Drone> getDrones() {
+        return droneService.getDrones();
     }
 }

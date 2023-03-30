@@ -22,7 +22,7 @@ public class Medication {
     private String weight;
 
     @Column(name = "code")
-    private String model;
+    private String code;
 
     @Column(name = "image")
     private Blob image;

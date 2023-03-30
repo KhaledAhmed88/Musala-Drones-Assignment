@@ -5,6 +5,8 @@ import com.example.drones.repositories.DroneRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DroneService {
 
@@ -13,5 +15,9 @@ public class DroneService {
 
     public void addDrone(Drone drone) {
         droneRepo.save(drone);
+    }
+
+    public List<Drone> getDrones() {
+        return droneRepo.findAll();
     }
 }
