@@ -26,4 +26,8 @@ public class Medication {
 
     @Column(name = "image")
     private Blob image;
+
+//    @ManyToOne(optional = false)
+//    @JoinColumn(name = "drone_id", nullable = false)
+//    private Drone fkDrone;
 }

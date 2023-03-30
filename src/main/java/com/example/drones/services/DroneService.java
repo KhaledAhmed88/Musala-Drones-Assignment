@@ -2,7 +2,6 @@ package com.example.drones.services;
 
 import com.example.drones.entities.Drone;
 import com.example.drones.repositories.DroneRepo;
-import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

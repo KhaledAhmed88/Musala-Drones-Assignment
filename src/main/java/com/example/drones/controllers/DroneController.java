@@ -2,7 +2,6 @@ package com.example.drones.controllers;
 
 import com.example.drones.entities.Drone;
 import com.example.drones.services.DroneService;
-import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
