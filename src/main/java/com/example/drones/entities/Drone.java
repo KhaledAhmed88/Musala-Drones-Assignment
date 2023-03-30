@@ -16,10 +16,16 @@ public class Drone {
     @Column(name = "serialNumber")
     private String serialNumber;
 
+    @Column(name = "model")
+    private Enum model;
+
     @Column(name = "weightLimit")
     private String weightLimit;
 
     @Column(name = "batteryCapacity")
     private String batteryCapacity;
+
+    @Column(name = "state")
+    private String state;
 
 }

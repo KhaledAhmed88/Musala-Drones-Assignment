@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/api/v1/test")
-public class TestController {
+public class DroneController {
 
     @GetMapping
     public @ResponseBody String test() {
