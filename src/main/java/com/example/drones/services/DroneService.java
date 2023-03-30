@@ -35,7 +35,7 @@ public class DroneService {
 
     public Page<Drone> getAvailableDrones(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return droneRepo.findAllAvailableDrones(Double.valueOf(environment.getProperty("drone.battery.min.threshold")),
+        return droneRepo.findAllAvailableDrones(Integer.valueOf(environment.getProperty("drone.battery.min.threshold")),
                 pageable);
     }
 
