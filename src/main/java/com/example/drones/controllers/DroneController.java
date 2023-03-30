@@ -25,4 +25,14 @@ public class DroneController {
                                                @RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "size", defaultValue = "5") int size) {
         return droneService.getDrones(droneId, page, size);
     }
+
+    @GetMapping("/availability")
+    public @ResponseBody Page<Drone> getAvailableDrones(@RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "size", defaultValue = "5") int size) {
+        return droneService.getAvailableDrones(page, size);
+    }
+
+//    @GetMapping("/battery/{id}")
+//    public @ResponseBody Page<Drone> getAvailableDrones(@PathVariable(name="droneId") Integer droneId) {
+//        return droneService.getAvailableDrones(page, size);
+//    }
 }

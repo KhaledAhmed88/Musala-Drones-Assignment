@@ -2,6 +2,7 @@ package com.example.drones.services;
 
 import com.example.drones.entities.Drone;
 import com.example.drones.repositories.DroneRepo;
+import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DroneService {
+
+    @Autowired
+    Environment environment;
 
     @Autowired
     DroneRepo droneRepo;
@@ -27,5 +31,12 @@ public class DroneService {
         }
 
         return droneRepo.findAllById(droneId, pageable);
+    }
+
+    public Page<Drone> getAvailableDrones(int page, int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        return droneRepo.findAllAvailableDrones(Double.valueOf(environment.getProperty("drone.battery.min.threshold")),
+                pageable);
     }
 }

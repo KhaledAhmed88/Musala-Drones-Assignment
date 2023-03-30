@@ -13,4 +13,7 @@ public interface DroneRepo extends PagingAndSortingRepository<Drone, Long> {
     Page<Drone> findAll(Pageable pageable);
 
     Page<Drone> findAllById(Integer droneId, Pageable pageable);
+
+    @Query("select d from Drone d where d.batteryCapacity >= ?1")
+    Page<Drone> findAllAvailableDrones(Double batteryCapacityMinThreshold, Pageable pageable);
 }
