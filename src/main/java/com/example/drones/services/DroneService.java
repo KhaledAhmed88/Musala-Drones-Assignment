@@ -2,6 +2,7 @@ package com.example.drones.services;
 
 import com.example.drones.entities.Drone;
 import com.example.drones.repositories.DroneRepo;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,7 +24,6 @@ public class DroneService {
     }
 
     public Page<Drone> getDrones(Integer droneId, int page, int size) {
-
         Pageable pageable = PageRequest.of(page, size);
 
         if (droneId == null) {
@@ -34,9 +34,12 @@ public class DroneService {
     }
 
     public Page<Drone> getAvailableDrones(int page, int size) {
-
         Pageable pageable = PageRequest.of(page, size);
         return droneRepo.findAllAvailableDrones(Double.valueOf(environment.getProperty("drone.battery.min.threshold")),
                 pageable);
+    }
+
+    public Drone getDroneBatteryLevel(Integer droneId) {
+        return droneRepo.findAllById(droneId);
     }
 }

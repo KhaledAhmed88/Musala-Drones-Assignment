@@ -5,6 +5,7 @@ import com.example.drones.enums.DroneState;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Data
@@ -26,6 +27,7 @@ public class Drone {
     @Column(name = "weightLimit")
     private String weightLimit;
 
+    @Size(min = 0, max = 100)
     @Column(name = "batteryCapacity")
     private double batteryCapacity;
 
