@@ -4,12 +4,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Blob;
-import java.util.Base64;
 
 @Data
 @Entity
 @Table(name = "Medications")
-public class medication {
+public class Medication {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,5 +1,6 @@
 package com.example.drones.entities;
 
+import com.example.drones.enums.DroneModel;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,9 +16,9 @@ public class Drone {
 
     @Column(name = "serialNumber")
     private String serialNumber;
-
+    @Enumerated(EnumType.STRING)
     @Column(name = "model")
-    private Enum model;
+    private DroneModel model;
 
     @Column(name = "weightLimit")
     private String weightLimit;
