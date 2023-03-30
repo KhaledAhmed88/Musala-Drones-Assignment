@@ -3,10 +3,9 @@ package com.example.drones.controllers;
 import com.example.drones.entities.Drone;
 import com.example.drones.services.DroneService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/api/v1/drones")
@@ -21,8 +20,9 @@ public class DroneController {
         return "Drone has been registered successfully";
     }
 
-    @GetMapping
-    public @ResponseBody List<Drone> getDrones() {
-        return droneService.getDrones();
+    @GetMapping("/medications")
+    public @ResponseBody Page<Drone> getDrones(@RequestParam(name="droneId", required = false) Integer droneId,
+                                               @RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "size", defaultValue = "5") int size) {
+        return droneService.getDrones(droneId, page, size);
     }
 }
