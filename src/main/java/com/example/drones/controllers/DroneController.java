@@ -1,7 +1,9 @@
 package com.example.drones.controllers;
 
 import com.example.drones.entities.Drone;
+import com.example.drones.entities.Medication;
 import com.example.drones.services.DroneService;
+import com.example.drones.services.MedicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,9 @@ public class DroneController {
 
     @Autowired
     DroneService droneService;
+
+    @Autowired
+    MedicationService medicationService;
 
     @PostMapping("/register")
     public @ResponseBody String register(@RequestBody Drone drone) {
@@ -36,5 +41,11 @@ public class DroneController {
     @GetMapping("/battery/{id}")
     public @ResponseBody Map<String, Integer> getDroneBatteryLevel(@PathVariable(name="id") Integer droneId) {
         return droneService.getDroneBatteryLevel(droneId);
+    }
+
+    @PostMapping("/medication")
+    public @ResponseBody String addDroneMedication(@RequestBody Medication medication) {
+        medicationService.addDroneMedication(medication);
+        return "Medication has been added successfully";
     }
 }

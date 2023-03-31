@@ -2,10 +2,12 @@ package com.example.drones.entities;
 
 import com.example.drones.enums.DroneModel;
 import com.example.drones.enums.DroneState;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -35,4 +37,8 @@ public class Drone {
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
     private DroneState state;
+
+    @OneToMany(targetEntity = Medication.class)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private List<Medication> medications;
 }
