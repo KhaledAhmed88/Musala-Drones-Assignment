@@ -1,7 +1,9 @@
 package com.example.drones.services;
 
 import com.example.drones.entities.Drone;
+import com.example.drones.entities.Medication;
 import com.example.drones.repositories.DroneRepo;
+import com.example.drones.repositories.MedicationRepo;
 import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,9 @@ public class DroneService {
 
     @Autowired
     DroneRepo droneRepo;
+
+    @Autowired
+    MedicationRepo medicationRepo;
 
     public void addDrone(Drone drone) {
         droneRepo.save(drone);
@@ -48,5 +53,9 @@ public class DroneService {
         batteryLevel.put("batterLevel", drone.getBatteryCapacity());
 
         return batteryLevel;
+    }
+
+    public void addDroneMedication(Medication medication) {
+        medicationRepo.save(medication);
     }
 }
