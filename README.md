@@ -14,7 +14,10 @@ For building and running the application you need:
 mvn spring-boot:run
 ```
 
-## Important path
+## H2 In-memory store
 
-In-memory store: /h2-console
-Swagger: /swagger-ui.html
+/h2-console
+
+## Swagegr UI
+
+/swagger-ui.html
