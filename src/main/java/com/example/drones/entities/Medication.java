@@ -23,7 +23,7 @@ public class Medication {
     private String name;
 
     @Column(name = "weight")
-    private String weight;
+    private Double weight;
 
     @Column(name = "code")
     @Pattern(regexp = "^[A-Z-0-9_]+$")

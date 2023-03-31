@@ -3,6 +3,7 @@ package com.example.drones.controllers;
 import com.example.drones.dtos.DroneDTO;
 import com.example.drones.dtos.MedicationDTO;
 import com.example.drones.entities.Drone;
+import com.example.drones.exceptions.DroneWeightLimitValidationException;
 import com.example.drones.services.DroneService;
 import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class DroneController {
         try {
             return new ResponseEntity<>(droneService.addDroneMedication(medicationDTO), HttpStatus.CREATED);
         } catch(Exception e) {
-            if (e instanceof ConstraintViolationException) {
+            if (e instanceof ConstraintViolationException || e instanceof DroneWeightLimitValidationException) {
                 return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
             }
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

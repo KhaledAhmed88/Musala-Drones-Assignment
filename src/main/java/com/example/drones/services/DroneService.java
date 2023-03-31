@@ -4,6 +4,7 @@ import com.example.drones.dtos.DroneDTO;
 import com.example.drones.dtos.MedicationDTO;
 import com.example.drones.entities.Drone;
 import com.example.drones.entities.Medication;
+import com.example.drones.exceptions.DroneWeightLimitValidationException;
 import com.example.drones.repositories.DroneRepo;
 import com.example.drones.repositories.MedicationRepo;
 import org.modelmapper.ModelMapper;
@@ -65,6 +66,19 @@ public class DroneService {
 
     public String addDroneMedication(MedicationDTO medicationDTO) {
         Medication medication = modelMapper.map(medicationDTO, Medication.class);
+
+        Drone drone = droneRepo.findAllById(medicationDTO.getDrone().getId());
+        if (drone == null) {
+            throw new DroneWeightLimitValidationException("Drone doesn't exist");
+        }
+
+        Double weightSum = medicationRepo.weightSum(drone.getId()) == null ? 0 : medicationRepo.weightSum(drone.getId());
+
+        if (drone.getWeightLimit() < weightSum + medication.getWeight()) {
+            throw new DroneWeightLimitValidationException("Drone limit is exceeded. Drone limit is "
+                    + drone.getWeightLimit());
+        }
+
         medicationRepo.save(medication);
         return "Medication has been added successfully";
     }

@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class MedicationDTO {
     private String name;
-    private String weight;
+    private Double weight;
     private String code;
     private String image;
     private Drone drone;

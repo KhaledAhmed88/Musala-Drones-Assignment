@@ -29,7 +29,7 @@ public class Drone {
     @Column(name = "model")
     private DroneModel model;
 
-    @Range(min = 0, max = 500)
+    @Range(min = 1, max = 500)
     @Column(name = "weightLimit")
     private Double weightLimit;
 
