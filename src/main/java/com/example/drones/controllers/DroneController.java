@@ -1,10 +1,14 @@
 package com.example.drones.controllers;
 
+import com.example.drones.dtos.DroneDTO;
+import com.example.drones.dtos.MedicationDTO;
 import com.example.drones.entities.Drone;
-import com.example.drones.entities.Medication;
 import com.example.drones.services.DroneService;
+import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +22,15 @@ public class DroneController {
     DroneService droneService;
 
     @PostMapping("/register")
-    public @ResponseBody String register(@RequestBody Drone drone) {
-        droneService.addDrone(drone);
-        return "Drone has been registered successfully";
+    public @ResponseBody ResponseEntity<String> register(@RequestBody DroneDTO droneDTO) {
+        try {
+            return new ResponseEntity<>(droneService.addDrone(droneDTO), HttpStatus.CREATED);
+        } catch(Exception e) {
+            if (e instanceof ConstraintViolationException) {
+                return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/medications")
@@ -40,8 +50,14 @@ public class DroneController {
     }
 
     @PostMapping("/medication")
-    public @ResponseBody String addDroneMedication(@RequestBody Medication medication) {
-        droneService.addDroneMedication(medication);
-        return "Medication has been added successfully";
+    public @ResponseBody ResponseEntity<String> addDroneMedication(@RequestBody MedicationDTO medicationDTO) {
+        try {
+            return new ResponseEntity<>(droneService.addDroneMedication(medicationDTO), HttpStatus.CREATED);
+        } catch(Exception e) {
+            if (e instanceof ConstraintViolationException) {
+                return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

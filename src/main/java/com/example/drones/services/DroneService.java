@@ -1,9 +1,12 @@
 package com.example.drones.services;
 
+import com.example.drones.dtos.DroneDTO;
+import com.example.drones.dtos.MedicationDTO;
 import com.example.drones.entities.Drone;
 import com.example.drones.entities.Medication;
 import com.example.drones.repositories.DroneRepo;
 import com.example.drones.repositories.MedicationRepo;
+import org.modelmapper.ModelMapper;
 import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,8 +29,13 @@ public class DroneService {
     @Autowired
     MedicationRepo medicationRepo;
 
-    public void addDrone(Drone drone) {
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public String addDrone(DroneDTO droneDTO) {
+        Drone drone = modelMapper.map(droneDTO, Drone.class);
         droneRepo.save(drone);
+        return "Drone has been registered successfully";
     }
 
     public Page<Drone> getDrones(Integer droneId, int page, int size) {
@@ -55,7 +63,9 @@ public class DroneService {
         return batteryLevel;
     }
 
-    public void addDroneMedication(Medication medication) {
+    public String addDroneMedication(MedicationDTO medicationDTO) {
+        Medication medication = modelMapper.map(medicationDTO, Medication.class);
         medicationRepo.save(medication);
+        return "Medication has been added successfully";
     }
 }
