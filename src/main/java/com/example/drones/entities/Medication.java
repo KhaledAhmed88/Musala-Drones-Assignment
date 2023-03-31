@@ -1,11 +1,14 @@
 package com.example.drones.entities;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "Medications")
 public class Medication {
@@ -30,6 +33,8 @@ public class Medication {
     @Column(name = "image", columnDefinition = "blob")
     private String image;
 
+    @JsonBackReference
     @ManyToOne
+    @JoinColumn(name = "drone_id")
     private Drone drone;
 }
