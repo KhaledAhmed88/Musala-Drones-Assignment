@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/api/v1/drones")
 public class DroneController {
@@ -32,7 +34,7 @@ public class DroneController {
     }
 
     @GetMapping("/battery/{id}")
-    public @ResponseBody Drone getDroneBatteryLevel(@PathVariable(name="id") Integer droneId) {
+    public @ResponseBody Map<String, Integer> getDroneBatteryLevel(@PathVariable(name="id") Integer droneId) {
         return droneService.getDroneBatteryLevel(droneId);
     }
 }

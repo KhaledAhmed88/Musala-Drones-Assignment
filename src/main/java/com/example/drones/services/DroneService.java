@@ -9,6 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class DroneService {
 
@@ -38,7 +41,12 @@ public class DroneService {
                 pageable);
     }
 
-    public Drone getDroneBatteryLevel(Integer droneId) {
-        return droneRepo.findAllById(droneId);
+    public Map<String, Integer> getDroneBatteryLevel(Integer droneId) {
+        Drone drone = droneRepo.findAllById(droneId);
+
+        Map<String, Integer> batteryLevel = new HashMap<>();
+        batteryLevel.put("batterLevel", drone.getBatteryCapacity());
+
+        return batteryLevel;
     }
 }

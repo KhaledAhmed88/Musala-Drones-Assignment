@@ -3,7 +3,7 @@ package com.example.drones.entities;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.sql.Blob;
+import javax.validation.constraints.Pattern;
 
 @Data
 @Entity
@@ -16,18 +16,20 @@ public class Medication {
     private int id;
 
     @Column(name = "name")
+    @Pattern(regexp = "^[A-Za-z0-9-_]+$")
     private String name;
 
     @Column(name = "weight")
     private String weight;
 
     @Column(name = "code")
+    @Pattern(regexp = "^[A-Z-0-9_]+$")
     private String code;
 
-    @Column(name = "image")
-    private Blob image;
+    // base64
+    @Column(name = "image", columnDefinition = "blob")
+    private String image;
 
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = "drone_id", nullable = false)
-//    private Drone fkDrone;
+    @ManyToOne
+    private Drone drone;
 }

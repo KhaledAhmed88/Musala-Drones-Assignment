@@ -6,7 +6,6 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
@@ -25,7 +24,7 @@ public class Drone {
     @Column(name = "model")
     private DroneModel model;
 
-    @Range(min = 1, max = 500)
+    @Range(min = 0, max = 500)
     @Column(name = "weightLimit")
     private Double weightLimit;
 
@@ -36,8 +35,4 @@ public class Drone {
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
     private DroneState state;
-
-    @OneToMany
-    @Column(nullable = true)
-    private List<Medication> medications;
 }
